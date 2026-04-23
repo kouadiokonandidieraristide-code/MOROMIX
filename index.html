@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MASTER — Musiques du Moronou</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root{--gold:#C9A84C;--gold-light:#E8C96A;--gold-dim:#7A6030;--bg:#0A0A0A;--surface:#111111;--surface2:#1A1A1A;--surface3:#222222;--text:#F0EDE8;--text-muted:#7A7570;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.3;}
+  header{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,168,76,0.15);padding:0 2rem;height:70px;display:flex;align-items:center;justify-content:space-between;}
+  .logo{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:0.12em;background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-dim));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .logo span{font-family:'DM Sans',sans-serif;font-size:0.6rem;font-weight:300;letter-spacing:0.3em;display:block;-webkit-text-fill-color:var(--text-muted);color:var(--text-muted);text-transform:uppercase;margin-top:-4px;}
+  nav{display:flex;gap:0.5rem;}
+  .nav-btn{background:none;border:none;color:var(--text-muted);font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.5rem 1rem;cursor:pointer;transition:color 0.2s;border-radius:4px;}
+  .nav-btn:hover,.nav-btn.active{color:var(--gold);}
+  .hero{padding:5rem 2rem 4rem;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+  .hero-text h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,8vw,7rem);line-height:0.9;letter-spacing:0.04em;background:linear-gradient(160deg,#fff 0%,var(--gold-light) 40%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .hero-text p{margin-top:1.5rem;font-size:1rem;line-height:1.7;color:var(--text-muted);max-width:380px;font-weight:300;}
+  .hero-stats{display:flex;gap:2rem;margin-top:2.5rem;}
+  .stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);line-height:1;}
+  .stat-label{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);margin-top:2px;}
+  .hero-visual{position:relative;height:320px;display:flex;align-items:center;justify-content:center;}
+  .vinyl{width:260px;height:260px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#1a1a1a 0%,#0d0d0d 30%,#1a1a1a 31%,#111 45%,#1a1a1a 46%,#0d0d0d 60%,#1a1a1a 61%,#0d0d0d 75%,#1a1a1a 76%,#0d0d0d 100%);box-shadow:0 0 0 2px var(--gold-dim),0 20px 60px rgba(0,0,0,0.8);animation:spin 8s linear infinite;position:relative;}
+  .vinyl::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;background:radial-gradient(circle,var(--gold) 0%,var(--gold-dim) 100%);}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .glow-ring{position:absolute;width:300px;height:300px;border-radius:50%;border:1px solid rgba(201,168,76,0.2);animation:pulse-ring 3s ease-in-out infinite;}
+  @keyframes pulse-ring{0%,100%{transform:scale(1);opacity:0.5;}50%{transform:scale(1.05);opacity:1;}}
+  .search-section{padding:0 2rem 3rem;max-width:1200px;margin:0 auto;}
+  .search-bar{display:flex;gap:0.75rem;align-items:center;background:var(--surface2);border:1px solid rgba(201,168,76,0.2);border-radius:6px;padding:0.5rem 1rem;transition:border-color 0.2s;}
+  .search-bar:focus-within{border-color:var(--gold);}
+  .search-input{flex:1;background:none;border:none;outline:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.95rem;}
+  .search-input::placeholder{color:var(--text-muted);}
+  .filter-chips{display:flex;gap:0.5rem;margin-top:1rem;flex-wrap:wrap;}
+  .chip{background:none;border:1px solid var(--surface3);color:var(--text-muted);font-family:'Syne',sans-serif;font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.35rem 0.85rem;border-radius:30px;cursor:pointer;transition:all 0.2s;}
+  .chip:hover,.chip.active{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.08);}
+  .library-section{padding:0 2rem 6rem;max-width:1200px;margin:0 auto;}
+  .section-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:2rem;}
+  .section-title{font-family:'Syne',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);}
+  .section-line{flex:1;height:1px;background:linear-gradient(to right,rgba(201,168,76,0.3),transparent);}
+  .music-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--surface2);border:1px solid var(--surface2);border-radius:8px;overflow:hidden;}
+  .music-card{background:var(--surface);padding:1.5rem;transition:background 0.2s;position:relative;overflow:hidden;}
+  .music-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);transform:scaleY(0);transition:transform 0.2s;transform-origin:bottom;}
+  .music-card:hover{background:var(--surface2);}
+  .music-card:hover::before,.music-card.playing::before{transform:scaleY(1);}
+  .music-card.playing{background:var(--surface2);}
+  .card-top{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1rem;}
+  .card-cover{width:54px;height:54px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.4rem;}
+  .card-info{flex:1;min-width:0;}
+  .card-title{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .card-artist{font-size:0.8rem;color:var(--text-muted);margin-top:3px;}
+  .card-genre{display:inline-block;font-size:0.65rem;font-family:'Syne',sans-serif;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-dim);border:1px solid rgba(201,168,76,0.2);padding:0.2rem 0.5rem;border-radius:2px;margin-top:6px;}
+  .card-actions{display:flex;gap:0.5rem;align-items:center;margin-top:1rem;}
+  .btn-play{background:var(--gold);border:none;color:#000;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:transform 0.15s;flex-shrink:0;}
+  .btn-play:hover{background:var(--gold-light);transform:scale(1.08);}
+  .btn-download{background:var(--surface3);border:none;color:var(--text-muted);padding:0.4rem 0.9rem;border-radius:4px;cursor:pointer;font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;transition:all 0.2s;}
+  .btn-download:hover{background:var(--gold);color:#000;}
+  .card-duration{margin-left:auto;font-size:0.75rem;color:var(--text-muted);}
+  .player-bar{position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(15,15,15,0.97);backdrop-filter:blur(30px);border-top:1px solid rgba(201,168,76,0.25);padding:0 2rem;height:80px;display:flex;align-items:center;gap:2rem;transform:translateY(100%);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);}
+  .player-bar.visible{transform:translateY(0);}
+  .player-info{display:flex;align-items:center;gap:1rem;min-width:220px;}
+  .player-cover{width:46px;height:46px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
+  .player-title{font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;}
+  .player-artist{font-size:0.75rem;color:var(--text-muted);}
+  .player-controls{display:flex;align-items:center;gap:1rem;flex:1;justify-content:center;}
+  .ctrl-btn{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1rem;transition:color 0.2s;padding:0.3rem;}
+  .ctrl-btn:hover{color:var(--text);}
+  .ctrl-play{background:var(--gold);border:none;color:#000;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:background 0.2s;}
+  .ctrl-play:hover{background:var(--gold-light);}
+  .progress-section{flex:2;display:flex;align-items:center;gap:0.8rem;}
+  .progress-time{font-size:0.72rem;color:var(--text-muted);width:36px;text-align:center;}
+  .progress-bar{flex:1;height:3px;background:var(--surface3);border-radius:3px;cursor:pointer;overflow:hidden;}
+  .progress-fill{height:100%;background:linear-gradient(to right,var(--gold),var(--gold-light));border-radius:3px;width:0%;transition:width 0.5s linear;}
+  .cover-1{background:linear-gradient(135deg,#1a3a2a,#2d6a4f);}
+  .cover-2{background:linear-gradient(135deg,#3a1a1a,#6a2d2d);}
+  .cover-3{background:linear-gradient(135deg,#1a1a3a,#2d2d6a);}
+  .cover-4{background:linear-gradient(135deg,#3a2d1a,#6a4f2d);}
+  .cover-5{background:linear-gradient(135deg,#2d1a3a,#5a2d6a);}
+  .cover-6{background:linear-gradient(135deg,#1a2d3a,#2d4f6a);}
+  .empty-state{text-align:center;padding:5rem 2rem;grid-column:1/-1;}
+  .empty-icon{font-size:3rem;margin-bottom:1rem;}
+  .empty-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text-muted);margin-bottom:0.5rem;}
+  .empty-sub{font-size:0.85rem;color:var(--text-muted);opacity:0.6;}
+  .notice-bar{background:rgba(201,168,76,0.1);border-top:1px solid rgba(201,168,76,0.2);border-bottom:1px solid rgba(201,168,76,0.2);padding:0.75rem 2rem;text-align:center;font-size:0.78rem;color:var(--gold-dim);font-style:italic;}
+  .notice-bar strong{color:var(--gold);font-style:normal;}
+  footer{text-align:center;padding:2rem;font-size:0.72rem;color:var(--text-muted);opacity:0.5;padding-bottom:6rem;font-style:italic;}
+  audio{display:none;}
+  ::-webkit-scrollbar{width:4px;}
+  ::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:4px;}
+  @media(max-width:768px){.hero{grid-template-columns:1fr;gap:2rem;padding:3rem 1.5rem 2rem;}.hero-visual{height:200px;}.vinyl{width:180px;height:180px;}.glow-ring{width:220px;height:220px;}.library-section,.search-section{padding-left:1.5rem;padding-right:1.5rem;}.progress-section{display:none;}.player-bar{padding:0 1rem;gap:1rem;}.player-info{min-width:unset;}}
+</style>
+</head>
+<body>
+<audio id="audioPlayer"></audio>
+
+<header>
+  <div class="logo">MASTER<span>Musiques du Moronou</span></div>
+  <nav>
+    <button class="nav-btn active" onclick="filterGenre('all')">Tout</button>
+    <button class="nav-btn" onclick="filterGenre('Coupé-Décalé')">Coupé-Décalé</button>
+    <button class="nav-btn" onclick="filterGenre('Gospel')">Gospel</button>
+    <button class="nav-btn" onclick="filterGenre('Zouglou')">Zouglou</button>
+    <button class="nav-btn" onclick="filterGenre('Traditionnel Agni')">Traditionnel</button>
+  </nav>
+</header>
+
+<div class="notice-bar">
+  <strong>MASTER</strong> — Bibliothèque musicale du Moronou · Bongouanou, Côte d'Ivoire 🇨🇮
+</div>
+
+<div class="hero">
+  <div class="hero-text">
+    <h1>La Musique du Moronou</h1>
+    <p>La bibliothèque musicale de votre région. Découvrez, écoutez et téléchargez les artistes de Bongouanou et du Moronou.</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num" id="stat-tracks">0</div><div class="stat-label">Morceaux</div></div>
+      <div class="stat"><div class="stat-num" id="stat-artists">0</div><div class="stat-label">Artistes</div></div>
+      <div class="stat"><div class="stat-num" id="stat-genres">0</div><div class="stat-label">Genres</div></div>
+    </div>
+  </div>
+  <div class="hero-visual"><div class="glow-ring"></div><div class="vinyl"></div></div>
+</div>
+
+<div class="search-section">
+  <div class="search-bar">
+    <span>🔍</span>
+    <input type="text" class="search-input" placeholder="Rechercher un titre, un artiste..." id="searchInput" oninput="searchTracks()">
+  </div>
+  <div class="filter-chips" id="genreChips"></div>
+</div>
+
+<div class="library-section">
+  <div class="section-header"><span class="section-title">Bibliothèque</span><div class="section-line"></div></div>
+  <div class="music-grid" id="musicGrid"></div>
+</div>
+
+<footer>MASTER © 2025 — DDR Event' / Showbiz Moronou — Bongouanou, Côte d'Ivoire</footer>
+
+<div class="player-bar" id="playerBar">
+  <div class="player-info">
+    <div class="player-cover" id="playerCover"></div>
+    <div><div class="player-title" id="playerTitle">—</div><div class="player-artist" id="playerArtist">—</div></div>
+  </div>
+  <div class="player-controls">
+    <button class="ctrl-btn" onclick="prevTrack()">⏮</button>
+    <button class="ctrl-play" id="ctrlPlay" onclick="togglePlay()">▶</button>
+    <button class="ctrl-btn" onclick="nextTrack()">⏭</button>
+  </div>
+  <div class="progress-section">
+    <span class="progress-time" id="timeCurrent">0:00</span>
+    <div class="progress-bar" id="progressBar" onclick="seekTrack(event)"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="progress-time" id="timeDuration">0:00</span>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+// 🎵 AJOUTE TES MORCEAUX ICI
+// Pour chaque morceau, remplace l'URL par le vrai lien Supabase Storage
+// Format : { title, artist, genre, city, cover, url }
+// ═══════════════════════════════════════════════════
+const tracks = [
+
+  // ── EXEMPLE — remplace l'url par ton vrai lien Supabase ──
+  // {
+  //   title: 'Douman',
+  //   artist: 'Djipi Le Messager',
+  //   genre: 'Traditionnel Agni',
+  //   city: 'Kangandi',
+  //   cover: 'cover-1',
+  //   url: 'https://cijhwnpgxlfnyjzlboen.supabase.co/storage/v1/object/public/audio/TON_FICHIER.wav'
+  // },
+
+];
+// ═══════════════════════════════════════════════════
+
+const emojis = {'cover-1':'🎵','cover-2':'🎷','cover-3':'🎸','cover-4':'🥁','cover-5':'🎹','cover-6':'🎺'};
+let currentIndex = -1, isPlaying = false, activeGenre = 'all';
+const audio = document.getElementById('audioPlayer');
+
+function renderTracks(list) {
+  const g = document.getElementById('musicGrid');
+  if (!list.length) {
+    g.innerHTML = '<div class="empty-state"><div class="empty-icon">🎵</div><div class="empty-title">Aucune musique pour l\'instant</div><div class="empty-sub">La bibliothèque sera bientôt remplie !</div></div>';
+    return;
+  }
+  g.innerHTML = list.map(t => {
+    const i = tracks.indexOf(t);
+    const p = currentIndex === i && isPlaying;
+    return `<div class="music-card ${p?'playing':''}" id="c${i}">
+      <div class="card-top">
+        <div class="card-cover ${t.cover||'cover-1'}">${emojis[t.cover]||'🎵'}</div>
+        <div class="card-info">
+          <div class="card-title">${t.title}</div>
+          <div class="card-artist">${t.artist}</div>
+          <span class="card-genre">${t.genre||''}</span>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-play" onclick="play(${i})">${p?'⏸':'▶'}</button>
+        <button class="btn-download" onclick="dl(${i})">⬇ Télécharger</button>
+        <span class="card-duration">${t.duration||'—'}</span>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('stat-tracks').textContent = tracks.length;
+  document.getElementById('stat-artists').textContent = new Set(tracks.map(t=>t.artist)).size;
+  document.getElementById('stat-genres').textContent = new Set(tracks.map(t=>t.genre)).size;
+  const genres = ['all', ...new Set(tracks.map(t=>t.genre).filter(Boolean))];
+  document.getElementById('genreChips').innerHTML = genres.map(g =>
+    `<button class="chip ${activeGenre===g?'active':''}" onclick="filterGenre('${g}')">${g==='all'?'Tous les genres':g}</button>`
+  ).join('');
+}
+
+function getF() {
+  let list = tracks;
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  if (q) list = list.filter(t => t.title.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q));
+  if (activeGenre !== 'all') list = list.filter(t => t.genre === activeGenre);
+  return list;
+}
+
+function filterGenre(g) { activeGenre = g; renderTracks(getF()); }
+function searchTracks() { renderTracks(getF()); }
+
+function play(i) {
+  if (i < 0 || i >= tracks.length) return;
+  const t = tracks[i];
+  currentIndex = i; isPlaying = true;
+  audio.src = t.url; audio.play();
+  document.getElementById('playerTitle').textContent = t.title;
+  document.getElementById('playerArtist').textContent = t.artist;
+  const pc = document.getElementById('playerCover');
+  pc.className = `player-cover ${t.cover||'cover-1'}`;
+  pc.textContent = emojis[t.cover]||'🎵';
+  document.getElementById('ctrlPlay').textContent = '⏸';
+  document.getElementById('playerBar').classList.add('visible');
+  renderTracks(getF());
+}
+
+function togglePlay() {
+  if (currentIndex < 0) return;
+  if (audio.paused) { audio.play(); isPlaying = true; document.getElementById('ctrlPlay').textContent = '⏸'; }
+  else { audio.pause(); isPlaying = false; document.getElementById('ctrlPlay').textContent = '▶'; }
+  renderTracks(getF());
+}
+
+function prevTrack() { if (currentIndex > 0) play(currentIndex - 1); }
+function nextTrack() { if (currentIndex < tracks.length - 1) play(currentIndex + 1); else audio.pause(); }
+audio.addEventListener('ended', nextTrack);
+audio.addEventListener('timeupdate', () => {
+  if (!audio.duration) return;
+  document.getElementById('progressFill').style.width = (audio.currentTime / audio.duration * 100) + '%';
+  document.getElementById('timeCurrent').textContent = fmt(audio.currentTime);
+  document.getElementById('timeDuration').textContent = fmt(audio.duration);
+});
+function seekTrack(e) { const b = document.getElementById('progressBar'); audio.currentTime = (e.offsetX / b.offsetWidth) * audio.duration; }
+function fmt(s) { if (!s || isNaN(s)) return '0:00'; return `${Math.floor(s/60)}:${Math.floor(s%60).toString().padStart(2,'0')}`; }
+
+async function dl(i) {
+  const t = tracks[i];
+  try {
+    const res = await fetch(t.url);
+    const blob = await res.blob();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `${t.artist} - ${t.title}`;
+    a.click();
+  } catch(e) { window.open(t.url, '_blank'); }
+}
+
+renderTracks(tracks);
+</script>
+</body>
+</html>
