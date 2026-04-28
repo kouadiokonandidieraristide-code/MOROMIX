@@ -294,14 +294,18 @@ audio{display:none;}
       <div class="pay-split-item"><div class="pay-split-num artist">80 FCFA</div><div class="pay-split-label">Artiste</div></div>
       <div class="pay-split-item"><div class="pay-split-num platform">20 FCFA</div><div class="pay-split-label">MASTER</div></div>
     </div>
-    <div class="wave-num">
-      <div class="wave-num-label">Envoyer sur Wave</div>
-      <div class="wave-num-value">+225 07 03 24 05 89</div>
-    </div>
+    <a href="https://pay.wave.com/m/M_ci_PQ6XeLQnFrMh/c/ci/?amount=100" target="_blank" id="wavepaylink" style="display:block;text-decoration:none;">
+      <div class="wave-num" style="cursor:pointer;border-color:rgba(74,144,226,0.6);transition:all 0.2s;">
+        <div class="wave-num-label">👆 Appuie ici pour payer avec Wave</div>
+        <div class="wave-num-value" style="font-size:2.2rem;">💙 100 FCFA</div>
+        <div style="font-size:0.75rem;color:#4A90E2;margin-top:6px;">Wave s'ouvre automatiquement</div>
+      </div>
+    </a>
     <div class="wave-instruction">
-      1. Ouvre Wave sur ton téléphone<br>
-      2. Envoie <strong style="color:var(--gold)">100 FCFA</strong> au numéro ci-dessus<br>
-      3. Clique "J'ai payé" — le téléchargement démarre
+      1. Appuie sur le bouton bleu ci-dessus<br>
+      2. Wave s'ouvre avec <strong style="color:var(--gold)">100 FCFA</strong> déjà rempli<br>
+      3. Confirme le paiement dans Wave<br>
+      4. Clique "J'ai payé" — le téléchargement démarre
     </div>
     <button class="btn-confirm-pay" onclick="confirmPayment()">✅ J'ai payé — Télécharger</button>
     <button class="btn-cancel" style="width:100%;text-align:center" onclick="document.getElementById('modalPay').classList.remove('open')">Annuler</button>
