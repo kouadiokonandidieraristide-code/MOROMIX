@@ -174,30 +174,65 @@ audio{display:none;}
 ::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:4px;}
 @media(max-width:768px){.hero{grid-template-columns:1fr;gap:2rem;padding:3rem 1.5rem 2rem;}.hero-visual{height:200px;}.vinyl{width:180px;height:180px;}.glow-ring{width:220px;height:220px;}.library-section,.search-section,.dashboard{padding-left:1.5rem;padding-right:1.5rem;}.progress-section{display:none;}.form-row{grid-template-columns:1fr;}.player-bar{padding:0 1rem;gap:1rem;}.player-info{min-width:unset;}}
 </style>
-</head>
-<body>
-  <div style="width: 100%; padding: 10px 0; background: #000; text-align: center;">
-    <div style="max-width: 500px; margin: 0 auto; padding: 0 10px;">
-        <p style="font-size: 10px; color: #d4af37; margin-bottom: 5px; font-weight: bold;">⭐ PARTENAIRE PRESTIGE ⭐</p>
-        <a href="https://wa.me/2250789330143">
-            <img src="1000489358.jpg.jpg" style="width: 100%; border-radius: 12px; border: 1px solid #d4af37;">
-        </a>
-    </div>
-</div>
+
 
 <style>
     /* 1. Le Conteneur Panoramique */
     .slider-container {
         width: 90%;
-        margin: 20px auto;
-        overflow: hidden; /* Cache ce qui dépasse */
-        border-radius: 20px;
+        margin: 20px auto 0 auto;
+        overflow: hidden;
+        border-radius: 20px 20px 0 0;
         border: 2px solid #d4af37;
         background: #000;
-        position: relative;
-        box-shadow: 0px 10px 30px rgba(0,0,0,0.5);
     }
+    .slider-track {
+        display: flex;
+        width: 300%; 
+        animation: panoramic 12s infinite ease-in-out;
+    }
+    .slider-track img {
+        width: 33.33%;
+        height: 250px;
+        object-fit: contain;
+        background: #000;
+    }
+    @keyframes panoramic {
+        0% { transform: translateX(0); }
+        30% { transform: translateX(0); }
+        33% { transform: translateX(-33.33%); }
+        63% { transform: translateX(-33.33%); }
+        66% { transform: translateX(-66.66%); }
+        96% { transform: translateX(-66.66%); }
+        100% { transform: translateX(0); }
+    }
+    .cta-box {
+        width: 90%;
+        margin: 0 auto 20px auto;
+        background: #d4af37;
+        color: black;
+        border-radius: 0 0 20px 20px;
+        padding: 15px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 14px;
+        border: 2px solid #d4af37;
+    }
+</style>
 
+<div class="slider-container">
+    <div class="slider-track">
+        <img src="1000489358.jpg.jpg">
+        <img src="1000577118.jpg.jpeg">
+        <img src="1000581483.jpg.jpeg">
+    </div>
+</div>
+<a href="https://wa.me/2250789330143" style="text-decoration: none;">
+    <div class="cta-box">
+        🚀 CLIQUEZ ICI POUR RÉSERVER
+        <div style="font-size: 10px; font-weight: normal;">Publicité gérée par DDR PROD</div>
+    </div>
+</a>
     /* 2. L'animation de défilement */
     .slider-track {
         display: flex;
