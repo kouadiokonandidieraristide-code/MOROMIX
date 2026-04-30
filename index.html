@@ -228,65 +228,7 @@ audio{display:none;}
         <div style="font-size: 10px; font-weight: normal;">Publicité gérée par DDR PROD</div>
     </div>
 </a>
-    /* 2. L'animation de défilement */
-    .slider-track {
-        display: flex;
-        width: 300%; /* 3 images = 300% */
-        animation: panoramic 12s infinite ease-in-out;
-    }
-
-    .slider-track img {
-        width: 33.33%; /* Chaque image prend un tiers du track */
-        height: auto;
-        object-fit: cover;
-    }
-
-    @keyframes panoramic {
-        0% { transform: translateX(0); }
-        30% { transform: translateX(0); }
-        33% { transform: translateX(-33.33%); }
-        63% { transform: translateX(-33.33%); }
-        66% { transform: translateX(-66.66%); }
-        96% { transform: translateX(-66.66%); }
-        100% { transform: translateX(0); }
-    }
-
-    /* 3. La Case Appel à l'Annonce (Fixe en bas) */
-    .cta-box {
-        width: 80%;
-        margin: -10px auto 20px;
-        background: linear-gradient(145deg, #d4af37, #b8860b);
-        color: black;
-        border-radius: 0 0 15px 15px;
-        padding: 12px;
-        text-align: center;
-        font-weight: bold;
-        font-size: 13px;
-        box-shadow: 0px 5px 15px rgba(212, 175, 55, 0.3);
-        cursor: pointer;
-        position: relative;
-        z-index: 10;
-    }
-</style>
-
-<div style="font-family: 'Segoe UI', sans-serif;">
-
-    <div class="slider-container">
-        <div class="slider-track">
-            <img src="ddddda.jpg" alt="Brunch">
-            <img src="aaaaad.jpeg" alt="Concert">
-            <img src="logo instagram.jpeg" alt="Festi">
-        </div>
-    </div>
-
-    <a href="https://wa.me/2250789330143" style="text-decoration: none;">
-        <div class="cta-box">
-            📢 RÉSERVER / CONTACTER L'ORGANISATEUR
-            <div style="font-size: 9px; font-weight: normal; margin-top: 3px; opacity: 0.8;">
-                Service Publicitaire propulsé par DDR PROD
-            </div>
-        </div>
-    </a>
+ 
 
 </div>
 <audio id="audioPlayer"></audio>
